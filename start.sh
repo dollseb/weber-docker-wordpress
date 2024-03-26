@@ -26,7 +26,9 @@ echo "--- services started"
 echo "--- waiting for database"
 sleep 5
 echo "--- database started"
+
+
 echo "--- starting browser"
 sleep 1
-chromium-browser --kiosk "http://localhost:8080"
+chromium-browser --start-maximized --kiosk --noerrdialogs --disable-infobars --no-first-run --ozone-platform=wayland "http://localhost:8080" & > /dev/null &
 
