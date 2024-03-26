@@ -1,0 +1,32 @@
+services:
+
+  db:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    command: [
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci'
+    ]
+    volumes:
+      - ./data/sql:/var/lib/mysql
+    environment: 
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: wordpress
+
+  wp:
+    image: wordpress:6.4.3-php8.2-apache
+    ports:
+      - 8080:80
+    volumes:
+      - ./data/php/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
+      - ./data/htdocs:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DEBUG: false
+
+    depends_on:
+      - db
