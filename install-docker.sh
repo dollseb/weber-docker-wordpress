@@ -12,3 +12,6 @@ sudo sh get-Docker.sh
 
 # add current user to docker group
 sudo usermod -aG docker $USER
+
+# reboot the system 
+sudo reboot
